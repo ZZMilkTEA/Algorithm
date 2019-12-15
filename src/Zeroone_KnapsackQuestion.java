@@ -15,12 +15,13 @@ n(0<=n<=1000)个物品且背包容量为 c (c<=2000)，第二行为这 n 个物
 输出：
 15
  */
+
+import java.util.Scanner;
+
+public class Zeroone_KnapsackQuestion {
     //求0-1背包问题最大价值的函数
     //参数：c为背包容量，wi为物品重量数组，vi为物品价值数组
     //返回：int 最大价值
-import java.util.Scanner;
-
-    public class Zeroone_KnapsackQuestion {
     public static int zeroone_Knapsack(int c, int[] wi, int[] vi){
         int n = wi.length;  //物品数量
         int[][] dp = new int[n+1][c+1]; //动态规划所用到的记录表，记录在当前容量中前n个物品最高能装多大价值的东西
