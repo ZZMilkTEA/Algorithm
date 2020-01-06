@@ -24,25 +24,26 @@ public class Zeroone_KnapsackQuestion {
     //返回：int 最大价值
     public static int zeroone_Knapsack(int c, int[] wi, int[] vi){
         int n = wi.length;  //物品数量
-        int[][] dp = new int[n+1][c+1]; //动态规划所用到的记录表，记录在当前容量中前n个物品最高能装多大价值的东西
+        int[][] dp = new int[n+1][c+1]; //动态规划所用到的记录表，记录在当前容量中前n个物品最高能装多大价值的东西（各个子问题的最优解）
 
         //dp过程，判断是否装入的相关操作
         for (int i = 1; i <= n; i++){
             for (int j = 1; j <= c; j++){
                 if (j < wi[i-1])        //如果当前物品的重量超过当前背包的容量
-                    dp[i][j] = dp[i - 1][j];    //不装入当前物品，最优总价值从左复制过来
+                    dp[i][j] = dp[i - 1][j];    //不装入当前物品，最优总价值从（物品编号-1）的格子复制过来
                 else {
                     int NotLoad = dp[i - 1][j];
                     int Load = dp[i - 1][j - wi[i - 1]]   +   vi[i - 1];
-                    dp[i][j] = Math.max(NotLoad, Load);    //若能够放置，则比较不装时的最优价值和装了之后的价值，取大值
+                    dp[i][j] = Math.max(NotLoad, Load);    //若能够放置，则比较不装时的最优价值和装了之后与根据剩下空间最优价值加的总价值，取大值
                 }
             }
         }
         return dp[n][c];    //表格的最后一个元素内容即为答案（最优装载）
     }
+    //题目要求的话做到这里就行了，如果题目提问怎么装的话，则需要构造最优解
 
     //主程序
-    public static void main(String args[]){
+    public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
 
         int n = scanner.nextInt();
